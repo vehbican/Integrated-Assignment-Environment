@@ -6,15 +6,15 @@ public class CCompiler {
     public static void main(String[] args) {
 
         // Compiles hello.c script
-        try {
+        /*try {
             CompileFile("SortingStrings.c");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         // Runs exe
         try {
-            String[] commandlineArgs = {"main.exe","a","e","f", "g", "h", "c", "d", "b", "k", "m", "z", "y"};
+            String[] commandlineArgs = {"src/main/resources/com/teamfour/iae/extracteds/20200602036/main.exe","a","e","f", "g", "h", "c", "d", "b", "k", "m", "z", "y"};
             RunExecutable(commandlineArgs);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
