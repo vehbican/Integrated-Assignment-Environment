@@ -1,9 +1,7 @@
 package com.teamfour.iae;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -72,21 +70,19 @@ public class Main {
         ProcessManager processManager = new ProcessManager();
         String submissionDirectory = "src/main/resources/com/teamfour/iae/extracteds/20200602036";
         try {
-            processManager.CompileFile2(project.getConfiguration(),submissionDirectory);
+            processManager.CompileFile(project.getConfiguration(),submissionDirectory);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
         //Run Exe
         try {
-            /*List<String> parameters = new ArrayList<>();
-            parameters.add(submissionDirectory+"/"+project.getConfiguration().getExecutableName());
-            parameters.addAll(List.of(assignment.getTestInput().split(" ")));*/
             processManager.RunExecutable(config,submissionDirectory);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
+        // Serialize Project
         /*DataManager d = new DataManager();
         try {
             //d.SerializeObject(project,"project.txt");

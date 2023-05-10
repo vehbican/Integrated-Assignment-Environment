@@ -27,7 +27,7 @@ application {
 }
 
 javafx {
-    version = '17.0.1'
+    version = '18.0.1'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
@@ -35,7 +35,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation 'io.github.palexdev:materialfx:11.16.1'
+    implementation 'io.github.palexdev:materialfx:11.13.4'
 
 }
 

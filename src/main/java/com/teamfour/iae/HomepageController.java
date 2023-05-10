@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,8 +19,16 @@ public class HomepageController implements Initializable {
 
 
     @FXML
-    public void OnNewProject(){
+    public void OnNewProject() throws IOException {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("new-project-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.setTitle("New Project");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.show();
 
 
     }
@@ -55,7 +61,6 @@ public class HomepageController implements Initializable {
         stage.setTitle("New Configuration");
         stage.setScene(scene);
         stage.centerOnScreen();
-        stage.initStyle(StageStyle.DECORATED);
         stage.setResizable(false);
         stage.show();
 
