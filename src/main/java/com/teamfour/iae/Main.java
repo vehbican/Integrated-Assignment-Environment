@@ -9,21 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        //get compiler path from system environment variables automatically
-        String javacPath = CompilerPathDetector.findInPath("javac");
-        if (!javacPath.equals("")) {
-            System.out.println("javac path: " + javacPath);
-        } else {
-            System.out.println("javac not found in PATH");
-        }
-
-        String gccPath = CompilerPathDetector.findInPath("gcc");
-        if (!gccPath.equals("")) {
-            System.out.println("gcc path: " + gccPath);
-        } else {
-            System.out.println("gcc not found in PATH");
-        }
-
         Configuration config = new Configuration();
         /*config.setName("C Programming Language Configuration");
         config.setCompilerPath("C:\\msys64\\mingw64\\bin\\gcc.exe");
