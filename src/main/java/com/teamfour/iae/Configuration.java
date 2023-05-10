@@ -7,8 +7,8 @@ import java.util.List;
 public class Configuration implements Serializable {
     private String name;
     private String compilerPath;
-    private List<String> compilerParameters;
-    private List<String> runtimeParameters;
+    private List<String> compilerParameters; //gcc -o main.exe main.c
+    private List<String> runtimeParameters; //main.exe [input list]
     private String executableName;
     private String mainFileName;
 

@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.24.1'
 }
 
@@ -13,11 +13,9 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.8.1'
+    junitVersion = '5.9.2'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -25,7 +23,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.teamfour.iae'
-    mainClass = 'com.teamfour.iae.HelloApplication'
+    mainClass = 'com.teamfour.iae.App'
 }
 
 javafx {
@@ -37,6 +35,8 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'io.github.palexdev:materialfx:11.16.1'
+
 }
 
 test {
