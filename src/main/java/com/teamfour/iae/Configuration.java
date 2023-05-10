@@ -1,5 +1,6 @@
 package com.teamfour.iae;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,18 @@ public class Configuration implements Serializable {
     private String mainFileName;
 
     public Configuration(){
-
         compilerParameters = new ArrayList<>();
 
+        //get compiler path from system environment variables automatically, kullanıcı path seçmeden önce otomatik bulunanlar yazdırılabilir
+        String javacPath = findPathOfCompiler("javac");
+        if (!javacPath.equals("")) {
+            compilerPath = javacPath;
+        }
+
+        String gccPath = findPathOfCompiler("gcc");
+        if (!gccPath.equals("")) {
+            compilerPath = gccPath;
+        }
     }
 
     // GETTERS - SETTERS
@@ -59,7 +69,6 @@ public class Configuration implements Serializable {
         this.mainFileName = mainFileName;
     }
 
-
     public List<String> getRuntimeParameters() {
         return runtimeParameters;
     }
@@ -67,4 +76,18 @@ public class Configuration implements Serializable {
     public void setRuntimeParameters(List<String> runtimeParameters) {
         this.runtimeParameters = runtimeParameters;
     }
+
+    public static String findPathOfCompiler(String languageParameter) {
+        String path = System.getenv("PATH");
+        String[] paths = path.split(";");
+
+        for (String directory : paths) {
+            File executable = new File(directory, languageParameter + ".exe");
+            if (executable.exists() && executable.isFile()) {
+                return executable.getAbsolutePath();
+            }
+        }
+        return "";
+    }
+
 }
