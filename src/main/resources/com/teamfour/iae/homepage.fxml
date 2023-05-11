@@ -23,7 +23,6 @@
         <Menu mnemonicParsing="false" text="Configuration">
             <MenuItem mnemonicParsing="false" onAction="#OnNewConfiguration" text="New"/>
             <MenuItem mnemonicParsing="false" onAction="#OnEditConfiguration" text="Edit"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnDeleteConfiguration" text="Delete"/>
             <MenuItem mnemonicParsing="false" onAction="#OnImportConfiguration" text="Import"/>
             <MenuItem mnemonicParsing="false" onAction="#OnExportConfiguration" text="Export"/>
         </Menu>

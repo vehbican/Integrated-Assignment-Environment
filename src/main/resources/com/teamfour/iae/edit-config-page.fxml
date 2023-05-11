@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="375.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.EditConfigPageController">
+    <VBox alignment="CENTER" layoutX="250.0" layoutY="39.0" prefWidth="412.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MFXComboBox fx:id = "compilerName" />
+        <MFXTextField fx:id="compilerParametersInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Compiler Parameters" />
+        <HBox alignment="CENTER" spacing="10.0">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <MFXTextField fx:id="compilerPathInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="230.0" promptText="Compiler Path" />
+            <MFXButton fx:id="chooseCompilerPathButton" buttonType="RAISED" prefWidth="60.0" text="Choose" textAlignment="CENTER" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="10.0">
+            <MFXButton fx:id="editButton" buttonType="RAISED" prefWidth="145.0" style="-fx-background-color: #7286D3;" text="Edit" textAlignment="CENTER" textFill="WHITE" />
+            <MFXButton fx:id="deleteButton" buttonType="RAISED" prefWidth="145.0" style="-fx-background-color: #7286D3;" text="Delete" textAlignment="CENTER" textFill="WHITE" />
+
+        </HBox>
+    </VBox>
+</AnchorPane>

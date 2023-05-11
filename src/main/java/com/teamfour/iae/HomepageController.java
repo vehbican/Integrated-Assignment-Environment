@@ -38,6 +38,7 @@ public class HomepageController implements Initializable {
 
 
 
+
     }
     @FXML
     public void OnSaveProject(){
@@ -68,18 +69,21 @@ public class HomepageController implements Initializable {
     }
 
     @FXML
-    public void OnEditConfiguration(){
+    public void OnEditConfiguration() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("edit-config-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 375);
+        Stage stage = new Stage();
+        stage.setTitle("Edit Configuration");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.show();
 
 
 
     }
 
-    @FXML
-    public void OnDeleteConfiguration(){
 
-
-
-    }
 
     @FXML
     public void OnImportConfiguration(){
