@@ -54,12 +54,8 @@ public class NewConfigPageController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        configNameInput.setText(deserialized.getName());
-        compilerPathInput.setText(deserialized.getCompilerPath());
-        exeNameInput.setText(deserialized.getExecutableName());
-        mainFileInput.setText(deserialized.getMainFileName());
-        String joinedString = String.join(" ", deserialized.getCompilerParameters());
-        compilerParametersInput.setText(joinedString);
+        //set currentConfig
+        setCurrentConfiguration(deserialized);
     }
 
     private void OnChooseCompilerButton() {
@@ -102,5 +98,15 @@ public class NewConfigPageController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         return selectedFile.getAbsolutePath();
+    }
+
+    private void setCurrentConfiguration(Configuration config) {
+        CurrentConfiguration currentConfig = CurrentConfiguration.getInstance();
+        currentConfig.getConfiguration().setName(config.getName());
+        currentConfig.getConfiguration().setCompilerPath(config.getCompilerPath());
+        currentConfig.getConfiguration().setExecutableName(config.getExecutableName());
+        currentConfig.getConfiguration().setMainFileName(config.getMainFileName());
+        currentConfig.getConfiguration().getCompilerParameters().clear();
+        currentConfig.getConfiguration().getCompilerParameters().addAll(config.getCompilerParameters());
     }
 }
