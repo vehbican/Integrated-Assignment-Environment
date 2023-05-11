@@ -20,11 +20,25 @@ public class EditConfigPageController implements Initializable {
 
     @FXML
     MFXComboBox<String> compilerName;
-    @FXML
-    MFXTextField compilerPathInput;
+
 
     @FXML
     MFXTextField compilerParametersInput;
+
+    @FXML
+    MFXTextField mainFileInput;
+    @FXML
+    MFXTextField exeNameInput;
+    @FXML
+    MFXTextField configNameInput;
+
+
+
+
+
+
+    @FXML
+    MFXTextField compilerPathInput;
 
     @FXML
     MFXButton chooseCompilerPathButton;
@@ -60,6 +74,9 @@ public class EditConfigPageController implements Initializable {
                     compilerName.getSelectionModel().clearSelection();
                     compilerPathInput.clear();
                     compilerParametersInput.clear();
+                    mainFileInput.clear();
+                    exeNameInput.clear();
+                    configNameInput.clear();
                     showAlert(Alert.AlertType.INFORMATION, "Configuration Deleted", "Configuration file has been successfully deleted.");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Deletion Error", "Failed to delete the configuration file.");
@@ -74,9 +91,37 @@ public class EditConfigPageController implements Initializable {
 
         config.setCompilerPath(compilerPathInput.getText());
 
+        config.setMainFileName(mainFileInput.getText());
+        config.setExecutableName(exeNameInput.getText());
+        config.setName(configNameInput.getText());
+
         config.setCompilerParameters(List.of(compilerParametersInput.getText().trim().split(" ")));
+        String selectedCompiler = compilerName.getValue();
+        if (selectedCompiler != null) {
+            String configFilePath = "configs/" + selectedCompiler + ".txt";
+            File configFile = new File(configFilePath);
+            if (configFile.exists()) {
+                boolean isDeleted = configFile.delete();
+                if (isDeleted) {
+                    compilerName.getItems().remove(selectedCompiler);
+                    compilerName.getSelectionModel().clearSelection();
+                    compilerPathInput.clear();
+                    compilerParametersInput.clear();
+                    mainFileInput.clear();
+                    exeNameInput.clear();
+                    configNameInput.clear();
+                    showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
+                }
+            }
+
+
+        }
+
+
+
 
         String path = "configs/"+config.getName()+".txt";
+
 
         try {
             manager.SerializeObject(config,path);
@@ -134,6 +179,9 @@ public class EditConfigPageController implements Initializable {
                 throw new RuntimeException(e);
             }
             if (config != null) {
+                mainFileInput.setText(config.getMainFileName());
+                exeNameInput.setText(config.getExecutableName());
+                configNameInput.setText(config.getName());
                 compilerPathInput.setText(config.getCompilerPath());
                 compilerParametersInput.setText(String.join(" ", config.getCompilerParameters()));
             } else {

@@ -11,7 +11,11 @@
 <AnchorPane prefHeight="375.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.EditConfigPageController">
     <VBox alignment="CENTER" layoutX="250.0" layoutY="39.0" prefWidth="412.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <MFXComboBox fx:id = "compilerName" />
+        <MFXTextField fx:id="configNameInput" floatMode="DISABLED" floatingText="Config" prefHeight="30.0" prefWidth="300.0" promptText="Configuration Name" />
         <MFXTextField fx:id="compilerParametersInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Compiler Parameters" />
+        <MFXTextField fx:id="exeNameInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Program Executable Name" />
+        <MFXTextField fx:id="mainFileInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Main File" />
+
         <HBox alignment="CENTER" spacing="10.0">
             <VBox.margin>
                 <Insets />
