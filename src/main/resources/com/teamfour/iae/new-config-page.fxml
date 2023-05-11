@@ -28,7 +28,6 @@
       </HBox>
       <HBox alignment="CENTER" spacing="10.0">
          <MFXButton fx:id="createButton" buttonType="RAISED" prefWidth="145.0" style="-fx-background-color: #7286D3;" text="Create" textAlignment="CENTER" textFill="WHITE" />
-         <MFXButton fx:id="cancelButton" buttonType="RAISED" cancelButton="true" layoutX="265.0" layoutY="10.0" prefWidth="145.0" style="-fx-background-color: red;" text="Cancel" textAlignment="CENTER" textFill="WHITE" />
       </HBox>
    </VBox>
 </AnchorPane>

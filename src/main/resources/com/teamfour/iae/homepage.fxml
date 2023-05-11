@@ -6,29 +6,26 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
-            prefWidth="1080.0" style="-fx-background-color: #282a36;" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.HomepageController">
-    <MenuBar layoutX="14.0" layoutY="14.0" stylesheets="@menubar.css" AnchorPane.leftAnchor="0.0"
-             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #282a36;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.HomepageController">
+    <MenuBar fx:id="MenuBar" layoutX="14.0" layoutY="14.0" stylesheets="@menubar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets bottom="5.0" left="10.0" right="5.0" top="5.0"/>
+            <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
         </padding>
         <Menu mnemonicParsing="false" text="Project">
-            <MenuItem mnemonicParsing="false" onAction="#OnNewProject" text="New"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnOpenProject" text="Open"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnSaveProject" text="Save"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnProjectSettings" text="Settings"/>
+            <MenuItem mnemonicParsing="false" onAction="#OnNewProject" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#OnOpenProject" text="Open" />
+            <MenuItem mnemonicParsing="false" onAction="#OnSaveProject" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#OnProjectSettings" text="Settings" />
         </Menu>
         <Menu mnemonicParsing="false" text="Configuration">
-            <MenuItem mnemonicParsing="false" onAction="#OnNewConfiguration" text="New"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnEditConfiguration" text="Edit"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnImportConfiguration" text="Import"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnExportConfiguration" text="Export"/>
+            <MenuItem mnemonicParsing="false" onAction="#OnNewConfiguration" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#OnEditConfiguration" text="Edit" />
+            <MenuItem fx:id="ImportOnTabMenu" mnemonicParsing="false" onAction="#OnImportConfiguration" text="Import" />
+            <MenuItem mnemonicParsing="false" onAction="#OnExportConfiguration" text="Export" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" onAction="#OnAbout" text="About"/>
-            <MenuItem mnemonicParsing="false" onAction="#OnDocumentation" text="Documentation"/>
+            <MenuItem mnemonicParsing="false" onAction="#OnAbout" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#OnDocumentation" text="Documentation" />
         </Menu>
     </MenuBar>
 </AnchorPane>

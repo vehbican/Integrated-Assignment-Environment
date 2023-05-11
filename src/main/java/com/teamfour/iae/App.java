@@ -18,10 +18,6 @@ public class App extends Application {
         stage.centerOnScreen();
         stage.initStyle(StageStyle.DECORATED);
         stage.show();
-
-
-
-
     }
 
     public static void main(String[] args) {
