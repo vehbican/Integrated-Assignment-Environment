@@ -90,46 +90,54 @@ public class EditConfigPageController implements Initializable {
     private void OnEditButton() {
 
         config.setCompilerPath(compilerPathInput.getText());
-
         config.setMainFileName(mainFileInput.getText());
         config.setExecutableName(exeNameInput.getText());
         config.setName(configNameInput.getText());
-
         config.setCompilerParameters(List.of(compilerParametersInput.getText().trim().split(" ")));
+
         String selectedCompiler = compilerName.getValue();
-        if (selectedCompiler != null) {
-            String configFilePath = "configs/" + selectedCompiler + ".txt";
-            File configFile = new File(configFilePath);
-            if (configFile.exists()) {
-                boolean isDeleted = configFile.delete();
-                if (isDeleted) {
-                    compilerName.getItems().remove(selectedCompiler);
-                    compilerName.getSelectionModel().clearSelection();
-                    compilerPathInput.clear();
-                    compilerParametersInput.clear();
-                    mainFileInput.clear();
-                    exeNameInput.clear();
-                    configNameInput.clear();
-                    showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
-                }
+
+        //config name değişmeden edit işlemi uygulanırsa, eskisini editler
+        if (selectedCompiler.equals(config.getName())){
+            try {
+                String path = "configs/"+config.getName()+".txt";
+                manager.SerializeObject(config,path);
+
+                compilerName.getItems().remove(selectedCompiler);
+                compilerName.getSelectionModel().clearSelection();
+                compilerPathInput.clear();
+                compilerParametersInput.clear();
+                mainFileInput.clear();
+                exeNameInput.clear();
+                configNameInput.clear();
+                showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
+                closeWindow();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            //config name değiştiğinde edit işlemi uygulanırsa, eskisini siler
+            File oldConfigFile = new File("configs/" + selectedCompiler + ".txt");
+            if (oldConfigFile.exists()) {
+                oldConfigFile.delete();
             }
 
+            try {
+                manager.SerializeObject(config,"configs/" + config.getName() + ".txt");
 
+                compilerName.getItems().remove(selectedCompiler);
+                compilerName.getSelectionModel().clearSelection();
+                compilerPathInput.clear();
+                compilerParametersInput.clear();
+                mainFileInput.clear();
+                exeNameInput.clear();
+                configNameInput.clear();
+                showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
+                closeWindow();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-
-
-
-        String path = "configs/"+config.getName()+".txt";
-
-
-        try {
-            manager.SerializeObject(config,path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        closeWindow();
     }
 
     private void OnChooseCompilerButton() {
@@ -150,9 +158,7 @@ public class EditConfigPageController implements Initializable {
                     Configuration config;
                     try {
                         config = (Configuration) manager.DeserializeObject(configFilePath);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (ClassNotFoundException e) {
+                    } catch (IOException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                     if (config != null) {
