@@ -85,7 +85,6 @@ public class HomepageController implements Initializable {
 
     @FXML
     public void OnImportConfiguration(){
-        //todo singletondaki config importtan sonra değişmeli
 
         Configuration deserialized;
         try {
@@ -94,6 +93,17 @@ public class HomepageController implements Initializable {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        setCurrentConfiguration(deserialized);
+    }
+
+    private void setCurrentConfiguration(Configuration config) {
+        CurrentConfiguration currentConfig = CurrentConfiguration.getInstance();
+        currentConfig.getConfiguration().setName(config.getName());
+        currentConfig.getConfiguration().setCompilerPath(config.getCompilerPath());
+        currentConfig.getConfiguration().setExecutableName(config.getExecutableName());
+        currentConfig.getConfiguration().setMainFileName(config.getMainFileName());
+        currentConfig.getConfiguration().getCompilerParameters().clear();
+        currentConfig.getConfiguration().getCompilerParameters().addAll(config.getCompilerParameters());
     }
 
     private String fileChooser(){

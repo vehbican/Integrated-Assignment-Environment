@@ -21,21 +21,17 @@ public class EditConfigPageController implements Initializable {
     @FXML
     MFXComboBox<String> compilerName;
 
-
     @FXML
     MFXTextField compilerParametersInput;
 
     @FXML
     MFXTextField mainFileInput;
+
     @FXML
     MFXTextField exeNameInput;
+
     @FXML
     MFXTextField configNameInput;
-
-
-
-
-
 
     @FXML
     MFXTextField compilerPathInput;
@@ -119,7 +115,10 @@ public class EditConfigPageController implements Initializable {
             //config name değiştiğinde edit işlemi uygulanırsa, eskisini siler
             File oldConfigFile = new File("configs/" + selectedCompiler + ".txt");
             if (oldConfigFile.exists()) {
-                oldConfigFile.delete();
+                boolean deleted = oldConfigFile.delete();
+                if (!deleted) {
+                    System.err.println("Failed to delete the old named config file.");
+                }
             }
 
             try {
