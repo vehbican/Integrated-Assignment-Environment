@@ -4,13 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
 
+    @FXML
+    MenuBar MenuBar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -29,8 +34,6 @@ public class HomepageController implements Initializable {
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.show();
-
-
     }
 
     @FXML
@@ -78,18 +81,32 @@ public class HomepageController implements Initializable {
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.show();
-
-
-
     }
-
-
 
     @FXML
     public void OnImportConfiguration(){
+        //todo singletondaki config importtan sonra değişmeli
 
+        Configuration deserialized;
+        try {
+            DataManager manager = new DataManager();
+            deserialized = (Configuration) manager.DeserializeObject(fileChooser());
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    private String fileChooser(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Compiler");
 
+        File initialDirectory = new File(System.getProperty("user.home"));
+        fileChooser.setInitialDirectory(initialDirectory);
+
+        Stage stage = (Stage) MenuBar.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        return selectedFile.getAbsolutePath();
     }
 
     @FXML
