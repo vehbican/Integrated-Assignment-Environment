@@ -42,7 +42,6 @@ public class NewConfigPageController implements Initializable {
 
     @FXML
     MFXComboBox<String> autoDetectedCompilers;
-    DataManager manager = new DataManager();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createButton.setOnAction(event -> OnCreateButton());
@@ -103,13 +102,14 @@ public class NewConfigPageController implements Initializable {
     private void OnImportButton() {
         Configuration deserialized;
         try {
-           deserialized = (Configuration) manager.DeserializeObject(fileChooser());
+           deserialized = (Configuration) DataManager.DeserializeObject(fileChooser());
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
         //set currentConfig
-        setCurrentConfiguration(deserialized);
+        ProjectManager.getInstance().setCurrentConfiguration(deserialized);
+        ProjectManager.getInstance().getImportedConfigurations().add(deserialized);
     }
 
     private void OnChooseCompilerButton() {
@@ -126,13 +126,15 @@ public class NewConfigPageController implements Initializable {
         config.setMainFileName(mainFileInput.getText());
         config.getCompilerParameters().addAll(List.of(compilerParametersInput.getText().trim().split(" ")));
 
+
         //set
-        setCurrentConfiguration(config);
+        ProjectManager.getInstance().setCurrentConfiguration(config);
+        ProjectManager.getInstance().getImportedConfigurations().add(config);
 
         //save
         String path = "configs/"+configNameInput.getText()+".txt";
         try {
-            manager.SerializeObject(config,path);
+            DataManager.SerializeObject(config,path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -158,13 +160,4 @@ public class NewConfigPageController implements Initializable {
         return selectedFile.getAbsolutePath();
     }
 
-    private void setCurrentConfiguration(Configuration config) {
-        CurrentConfiguration currentConfig = CurrentConfiguration.getInstance();
-        currentConfig.getConfiguration().setName(config.getName());
-        currentConfig.getConfiguration().setCompilerPath(config.getCompilerPath());
-        currentConfig.getConfiguration().setExecutableName(config.getExecutableName());
-        currentConfig.getConfiguration().setMainFileName(config.getMainFileName());
-        currentConfig.getConfiguration().getCompilerParameters().clear();
-        currentConfig.getConfiguration().getCompilerParameters().addAll(config.getCompilerParameters());
-    }
 }

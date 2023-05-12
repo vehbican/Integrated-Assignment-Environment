@@ -60,7 +60,7 @@ public class HomepageController implements Initializable {
     public void OnNewConfiguration() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("new-config-page.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 375);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         Stage stage = new Stage();
         stage.setTitle("New Configuration");
         stage.setScene(scene);
@@ -88,23 +88,14 @@ public class HomepageController implements Initializable {
 
         Configuration deserialized;
         try {
-            DataManager manager = new DataManager();
-            deserialized = (Configuration) manager.DeserializeObject(fileChooser());
+            deserialized = (Configuration) DataManager.DeserializeObject(fileChooser());
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        setCurrentConfiguration(deserialized);
+        ProjectManager.getInstance().setCurrentConfiguration(deserialized);
+        ProjectManager.getInstance().getImportedConfigurations().add(deserialized);
     }
 
-    private void setCurrentConfiguration(Configuration config) {
-        CurrentConfiguration currentConfig = CurrentConfiguration.getInstance();
-        currentConfig.getConfiguration().setName(config.getName());
-        currentConfig.getConfiguration().setCompilerPath(config.getCompilerPath());
-        currentConfig.getConfiguration().setExecutableName(config.getExecutableName());
-        currentConfig.getConfiguration().setMainFileName(config.getMainFileName());
-        currentConfig.getConfiguration().getCompilerParameters().clear();
-        currentConfig.getConfiguration().getCompilerParameters().addAll(config.getCompilerParameters());
-    }
 
     private String fileChooser(){
         FileChooser fileChooser = new FileChooser();

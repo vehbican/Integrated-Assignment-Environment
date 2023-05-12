@@ -18,7 +18,22 @@ public class App extends Application {
         stage.centerOnScreen();
         stage.initStyle(StageStyle.DECORATED);
         stage.show();
+
+
+        stage.setOnCloseRequest(event -> OnApplicationQuit());
+
     }
+
+    private void OnApplicationQuit(){
+
+        try {
+            DataManager.SerializeObject(ProjectManager.getInstance().getImportedConfigurations(),"configs/configs.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     public static void main(String[] args) {
         launch();

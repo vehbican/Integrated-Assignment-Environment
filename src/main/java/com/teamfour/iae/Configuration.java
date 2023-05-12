@@ -16,6 +16,11 @@ public class Configuration implements Serializable {
         compilerParameters = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     // GETTERS - SETTERS
     public String getName() {
         return name;
