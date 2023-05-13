@@ -52,9 +52,11 @@ public class NewProjectPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        configurationComboBox.setOnShown(event -> configurationComboBox.getItems().setAll(FXCollections.observableArrayList(ProjectManager.getInstance().getImportedConfigurations())));
+
+        configurationComboBox.setOnMouseEntered(event -> configurationComboBox.getItems().setAll(FXCollections.observableArrayList(ProjectManager.getInstance().getImportedConfigurations())));
 
         configurationComboBox.getItems().addAll(FXCollections.observableArrayList(ProjectManager.getInstance().getImportedConfigurations()));
+
 
         ObservableList<Project.InputMethods> inputMethods = FXCollections.observableArrayList(Project.InputMethods.MANUAL,Project.InputMethods.VIA_SCRIPT);
         inputMethodComboBox.getItems().addAll(inputMethods);
