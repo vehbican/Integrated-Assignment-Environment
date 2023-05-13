@@ -11,14 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.NewConfigPageController">
+<AnchorPane prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.NewConfigPageController">
    <VBox alignment="CENTER" layoutX="250.0" layoutY="39.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <MFXButton fx:id="importButton" alignment="CENTER" buttonType="RAISED" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #5F8D4E; -fx-text-fill: white;" text="IMPORT" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </MFXButton>
-      <Separator prefWidth="200.0" />
       <MFXTextField fx:id="configNameInput" floatMode="DISABLED" floatingText="Config" prefHeight="30.0" prefWidth="300.0" promptText="Configuration Name" />
       <MFXTextField fx:id="compilerParametersInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Compiler Parameters" />
       <MFXTextField fx:id="mainFileInput" floatMode="DISABLED" prefHeight="30.0" prefWidth="300.0" promptText="Main File" />

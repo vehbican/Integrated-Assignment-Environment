@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
-import javafx.stage.FileChooser;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,8 +17,16 @@ public class HomepageController implements Initializable {
     @FXML
     MenuBar MenuBar;
 
+    @FXML
+    Text projectInfo;
+
+    @FXML
+    Text configInfo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
     }
 
@@ -27,13 +35,18 @@ public class HomepageController implements Initializable {
     public void OnNewProject() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("new-project-page.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 450);
         Stage stage = new Stage();
         stage.setTitle("New Project");
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.setResizable(false);
         stage.show();
+
+        NewProjectPageController newProjectPageController = fxmlLoader.getController();
+
+        newProjectPageController.homepageController = this;
+
     }
 
     @FXML
@@ -60,7 +73,7 @@ public class HomepageController implements Initializable {
     public void OnNewConfiguration() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("new-config-page.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 450);
         Stage stage = new Stage();
         stage.setTitle("New Configuration");
         stage.setScene(scene);
@@ -88,26 +101,23 @@ public class HomepageController implements Initializable {
 
         Configuration deserialized;
         try {
-            deserialized = (Configuration) DataManager.DeserializeObject(fileChooser());
+            deserialized = (Configuration) DataManager.DeserializeObject(Helpers.fileChooser(MenuBar,"Select Configuration"));
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        ProjectManager.getInstance().setCurrentConfiguration(deserialized);
-        ProjectManager.getInstance().getImportedConfigurations().add(deserialized);
-    }
 
+        if (deserialized != null && deserialized.getClass().equals(Configuration.class)){
 
-    private String fileChooser(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Compiler");
+            ProjectManager.getInstance().setCurrentConfiguration(deserialized);
+            ProjectManager.getInstance().getImportedConfigurations().add(deserialized);
+            Helpers.showAlert(Alert.AlertType.INFORMATION,"Configuration Imported",deserialized.ConfigInfo());
 
-        File initialDirectory = new File(System.getProperty("user.home"));
-        fileChooser.setInitialDirectory(initialDirectory);
+        }else {
 
-        Stage stage = (Stage) MenuBar.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
+            Helpers.showAlert(Alert.AlertType.ERROR,"Import Error","Import failed.");
 
-        return selectedFile.getAbsolutePath();
+        }
+
     }
 
     @FXML

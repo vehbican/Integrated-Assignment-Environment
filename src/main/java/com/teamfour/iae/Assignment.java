@@ -7,7 +7,7 @@ public class Assignment implements Serializable {
     private String name;
     private String definition;
     private String testInput;
-    private String expectedOutput;
+    private String expectedOutputFilePath;
 
 
     // GETTERS - SETTERS
@@ -43,11 +43,11 @@ public class Assignment implements Serializable {
         this.testInput = testInput;
     }
 
-    public String getExpectedOutput() {
-        return expectedOutput;
+    public String getExpectedOutputFilePath() {
+        return expectedOutputFilePath;
     }
 
-    public void setExpectedOutput(String expectedOutput) {
-        this.expectedOutput = expectedOutput;
+    public void setExpectedOutputFilePath(String expectedOutputFilePath) {
+        this.expectedOutputFilePath = expectedOutputFilePath;
     }
 }

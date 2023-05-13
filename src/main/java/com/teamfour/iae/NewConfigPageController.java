@@ -5,7 +5,6 @@ import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -37,16 +36,16 @@ public class NewConfigPageController implements Initializable {
     @FXML
     MFXButton createButton;
 
-    @FXML
-    MFXButton importButton;
 
     @FXML
     MFXComboBox<String> autoDetectedCompilers;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         createButton.setOnAction(event -> OnCreateButton());
         chooseCompilerPathButton.setOnAction(event -> OnChooseCompilerButton());
-        importButton.setOnAction(event -> OnImportButton());
 
         populateAutoDetectedCompilers();
         autoDetectedCompilers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -54,6 +53,9 @@ public class NewConfigPageController implements Initializable {
                 compilerPathInput.setText(newValue);
             }
         });
+
+        compilerPathInput.setEditable(false);
+
     }
 
     private void populateAutoDetectedCompilers() {
@@ -99,21 +101,8 @@ public class NewConfigPageController implements Initializable {
         return "";
     }
 
-    private void OnImportButton() {
-        Configuration deserialized;
-        try {
-           deserialized = (Configuration) DataManager.DeserializeObject(fileChooser());
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //set currentConfig
-        ProjectManager.getInstance().setCurrentConfiguration(deserialized);
-        ProjectManager.getInstance().getImportedConfigurations().add(deserialized);
-    }
-
     private void OnChooseCompilerButton() {
-            String filePath = fileChooser();
+            String filePath = Helpers.fileChooser(chooseCompilerPathButton,"Select Compiler");
             compilerPathInput.setText(filePath);
     }
 
@@ -131,8 +120,9 @@ public class NewConfigPageController implements Initializable {
         ProjectManager.getInstance().setCurrentConfiguration(config);
         ProjectManager.getInstance().getImportedConfigurations().add(config);
 
+
         //save
-        String path = "configs/"+configNameInput.getText()+".txt";
+        String path = Helpers.configsDir+"/"+configNameInput.getText()+".txt";
         try {
             DataManager.SerializeObject(config,path);
         } catch (IOException e) {
@@ -141,23 +131,9 @@ public class NewConfigPageController implements Initializable {
 
         closeWindow();
     }
-
     private void closeWindow() {
         Stage stage = (Stage) createButton.getScene().getWindow();
         stage.close();
-    }
-
-    private String fileChooser(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Compiler");
-
-        File initialDirectory = new File(System.getProperty("user.home"));
-        fileChooser.setInitialDirectory(initialDirectory);
-
-        Stage stage = (Stage) chooseCompilerPathButton.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
-
-        return selectedFile.getAbsolutePath();
     }
 
 }

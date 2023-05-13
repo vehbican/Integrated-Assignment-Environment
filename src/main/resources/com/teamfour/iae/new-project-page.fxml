@@ -5,8 +5,9 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.NewProjectPageController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.NewProjectPageController">
    <MFXTextField fx:id="projectNameInput" caretVisible="false" floatingText="Project Name" layoutX="258.0" layoutY="14.0" promptText="ExampleProject" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" />
    <MFXComboBox fx:id="configurationComboBox" floatingText="Configuration" layoutX="241.0" layoutY="113.0" promptText="Example Configuration" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="90.0" />
    <MFXButton fx:id="createConfigButton" buttonType="RAISED" layoutX="340.0" layoutY="95.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Create New" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="95.0" />
@@ -16,7 +17,12 @@
    <MFXComboBox fx:id="inputMethodComboBox" floatingText="Input Method" layoutX="50.0" layoutY="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="220.0" />
    <MFXTextField fx:id="expectedOutputFileInput" floatingText="Expected Output File" layoutX="50.0" layoutY="260.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="280.0" />
    <MFXButton fx:id="chooseExpectedOutputFileButton" buttonType="RAISED" layoutX="450.0" layoutY="289.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Choose" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="289.0" />
+   <MFXButton fx:id="createProjectButton" alignment="CENTER" buttonType="RAISED" layoutX="273.0" layoutY="355.0" prefHeight="50.0" style="-fx-background-color: green; -fx-text-fill: white;" text="CREATE" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="350.0">
+      <font>
+         <Font name="System Bold" size="27.0" />
+      </font>
+   </MFXButton>
    <padding>
-      <Insets top="25.0" />
+      <Insets top="10.0" />
    </padding>
 </AnchorPane>

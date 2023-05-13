@@ -21,6 +21,16 @@ public class Configuration implements Serializable {
         return name;
     }
 
+    public String ConfigInfo(){
+
+        return  "Name: " + this.name +
+                "\nCompiler Path: " + this.compilerPath +
+                "\nCompiler Parameters: " + this.compilerParameters +
+                "\nExecutable Name: " + this.executableName +
+                "\nMain File: " + this.mainFileName;
+
+    }
+
     // GETTERS - SETTERS
     public String getName() {
         return name;

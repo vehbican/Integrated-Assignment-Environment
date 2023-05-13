@@ -27,7 +27,7 @@ public class App extends Application {
     private void OnApplicationQuit(){
 
         try {
-            DataManager.SerializeObject(ProjectManager.getInstance().getImportedConfigurations(),"configs/configs.txt");
+            DataManager.SerializeObject(ProjectManager.getInstance().getImportedConfigurations(),Helpers.configsDir+"/configs.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

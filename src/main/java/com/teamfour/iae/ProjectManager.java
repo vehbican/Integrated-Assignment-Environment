@@ -9,17 +9,24 @@ public class ProjectManager {
     private final ArrayList<Configuration> importedConfigurations;
     private Configuration currentConfiguration;
 
+    private Project currentProject;
+
     private ProjectManager() {
 
-        File configsDir = new File("configs");
+        File configsDir = new File(Helpers.configsDir);
         if(!configsDir.exists()){configsDir.mkdirs();}
 
+        File submissionsDir = new File(Helpers.submissionsDir);
+        if (!submissionsDir.exists()){submissionsDir.mkdirs();}
+
+
         currentConfiguration = new Configuration();
+        currentConfiguration.setName("InitialConfig");
         try {
-            File file = new File("configs/configs.txt");
+            File file = new File(Helpers.configsDir+"/configs.txt");
             if (file.isFile()){
 
-                importedConfigurations = (ArrayList<Configuration>) DataManager.DeserializeObject("configs/configs.txt");
+                importedConfigurations = (ArrayList<Configuration>) DataManager.DeserializeObject(Helpers.configsDir+"/configs.txt");
 
             }else {
 
@@ -47,5 +54,13 @@ public class ProjectManager {
 
     public ArrayList<Configuration> getImportedConfigurations() {
         return importedConfigurations;
+    }
+
+    public Project getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Project currentProject) {
+        this.currentProject = currentProject;
     }
 }

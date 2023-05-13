@@ -39,13 +39,13 @@ public class Main {
                 "The assignment must be saved as a main.c file.");
 
         assignment.setTestInput("a c d e b");
-        assignment.setExpectedOutput("a\nb\nc\nd\ne");
+        assignment.setExpectedOutputFilePath("a\nb\nc\nd\ne");
 
         Project project = new Project();
         project.setId(1);
         project.setName("C Project");
         project.setConfiguration(config);
-        project.setAssignment(assignment);
+        //project.setAssignment(assignment);
         project.setZippedSubmissionsDirectory("src\\main\\resources\\com\\teamfour\\iae\\zips");
         project.setExtractedSubmissionsDirectory("src\\main\\resources\\com\\teamfour\\iae\\extracteds");
 

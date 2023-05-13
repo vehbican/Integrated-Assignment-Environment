@@ -19,12 +19,18 @@ public class DataManager {
 
     public static Object DeserializeObject(String path) throws IOException, ClassNotFoundException {
 
-        FileInputStream fileInputStream = new FileInputStream(path);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Object o = objectInputStream.readObject();
-        objectInputStream.close();
+        File f = new File(path);
+        if (f.isFile()){
 
-        return o;
+            FileInputStream fileInputStream = new FileInputStream(path);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Object o = objectInputStream.readObject();
+            objectInputStream.close();
+            return o;
+
+        }
+
+        return null;
 
     }
 

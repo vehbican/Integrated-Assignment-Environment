@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -54,31 +53,31 @@ public class EditConfigPageController implements Initializable {
 
         configurationsComboBox.getItems().addAll(FXCollections.observableArrayList(ProjectManager.getInstance().getImportedConfigurations()));
 
+        compilerPathInput.setEditable(false);
 
     }
 
     private void OnDeleteButton() {
         Configuration selectedConfig = configurationsComboBox.getValue();
         if (selectedConfig != null) {
-            String configFilePath = "configs/" + selectedConfig + ".txt";
+            String configFilePath = Helpers.configsDir+"/" + selectedConfig + ".txt";
             File configFile = new File(configFilePath);
             if (configFile.exists()) {
                 boolean isDeleted = configFile.delete();
                 if (isDeleted) {
                     configurationsComboBox.getItems().remove(selectedConfig);
-                    configurationsComboBox.getSelectionModel().clearSelection();
                     compilerPathInput.clear();
                     compilerParametersInput.clear();
                     mainFileInput.clear();
                     exeNameInput.clear();
                     configNameInput.clear();
                     ProjectManager.getInstance().getImportedConfigurations().remove(selectedConfig);
-                    showAlert(Alert.AlertType.INFORMATION, "Configuration Deleted", "Configuration file has been successfully deleted.");
+                    Helpers.showAlert(Alert.AlertType.INFORMATION, "Configuration Deleted", "Configuration file has been successfully deleted.");
                 } else {
-                    showAlert(Alert.AlertType.ERROR, "Deletion Error", "Failed to delete the configuration file.");
+                    Helpers.showAlert(Alert.AlertType.ERROR, "Deletion Error", "Failed to delete the configuration file.");
                 }
             } else {
-                showAlert(Alert.AlertType.ERROR, "File Not Found", "Configuration file not found for the selected compiler.");
+                Helpers.showAlert(Alert.AlertType.ERROR, "File Not Found", "Configuration file not found for the selected compiler.");
             }
         }
     }
@@ -95,9 +94,9 @@ public class EditConfigPageController implements Initializable {
         selectedConfig.setName(configNameInput.getText());
         selectedConfig.setCompilerParameters(List.of(compilerParametersInput.getText().trim().split(" ")));
 
-        String path = "configs/"+selectedConfig.getName()+".txt";
+        String path = Helpers.configsDir+"/"+selectedConfig.getName()+".txt";
 
-        boolean isRenamed = new File("configs/"+s+".txt").renameTo(new File(path));
+        boolean isRenamed = new File(Helpers.configsDir+"/"+s+".txt").renameTo(new File(path));
 
         if (isRenamed){
 
@@ -108,7 +107,7 @@ public class EditConfigPageController implements Initializable {
                 mainFileInput.clear();
                 exeNameInput.clear();
                 configNameInput.clear();
-                showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
+                Helpers.showAlert(Alert.AlertType.INFORMATION, "Configuration Edited", "Configuration file has been successfully edited.");
                 closeWindow();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -119,7 +118,7 @@ public class EditConfigPageController implements Initializable {
     }
 
     private void OnChooseCompilerButton() {
-        String filePath = fileChooser();
+        String filePath = Helpers.fileChooser(chooseCompilerPathButton,"Choose Compiler");
         compilerPathInput.setText(filePath);
     }
 
@@ -136,28 +135,8 @@ public class EditConfigPageController implements Initializable {
             compilerParametersInput.setText(String.join(" ", selectedConfig.getCompilerParameters()));
 
         }else {
-            showAlert(Alert.AlertType.ERROR, "Configuration Not Found", "Configuration file not found for the selected compiler.");
+            Helpers.showAlert(Alert.AlertType.ERROR, "Configuration Not Found", "Configuration file not found for the selected compiler.");
         }
-    }
-
-    private String fileChooser(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Compiler");
-
-        File initialDirectory = new File(System.getProperty("user.home"));
-        fileChooser.setInitialDirectory(initialDirectory);
-
-        Stage stage = (Stage) chooseCompilerPathButton.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
-
-        return selectedFile.getAbsolutePath();
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void closeWindow() {
