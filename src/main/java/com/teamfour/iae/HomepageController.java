@@ -170,13 +170,20 @@ public class HomepageController implements Initializable {
 
                 // Input via a script that returns a string
 
-
-
-
+                /*FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("script-input-page.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setTitle("Script Input");
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.setResizable(false);
+                stage.showAndWait();*/
 
             }
 
         }
+
+        if (ProjectManager.getInstance().getCurrentProject().getTestInput().isBlank()){return;}
 
         ArrayList<String> runtimeParameters = new ArrayList<>();
 
@@ -255,7 +262,16 @@ public class HomepageController implements Initializable {
 
         Submission selected = submissionComboBox.getValue();
 
-        submissionOutputLog.setText(selected.getReport().getRuntimeOutputLog());
+        if(selected.getReport().getCompileTimeErrorLog().isBlank()){
+
+            submissionOutputLog.setText(selected.getReport().getRuntimeOutputLog());
+
+        }else {
+
+            submissionOutputLog.setText(selected.getReport().getCompileTimeErrorLog());
+
+        }
+
         expectedOutputLog.setText(selected.getReport().getExpectedOutput());
         resultText.setText(selected.getReport().getResult().toString());
 

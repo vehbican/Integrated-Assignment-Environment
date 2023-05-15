@@ -53,7 +53,7 @@ public class ProcessManager {
 
         commands.addAll(configuration.getRuntimeParameters());
 
-        // gcc, g++ and dotnet compilers find the path only in this way.
+        // gcc, g++ and dotnet compilers find the path only in this way. not sure why?
         if(configuration.getCompilerParameters().contains("gcc") || configuration.getCompilerParameters().get(0).contains("csc.exe") ||configuration.getCompilerParameters().contains("g++") ){
 
             String tmp = commands.get(0);

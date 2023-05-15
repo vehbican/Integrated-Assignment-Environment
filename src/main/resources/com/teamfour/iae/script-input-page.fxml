@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="720.0" style="-fx-background-color: #323262;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.ScriptInputPageController">
+   <children>
+      <MFXTextField fx:id="inputScriptPath" floatingText="Choose a script" layoutX="25.0" layoutY="25.0" prefHeight="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; The script should print the input." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; There should be one space between each input." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="120.0" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; Input should be in exactly one line." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="140.0" />
+      <MFXButton fx:id="chooseButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="628.0" layoutY="11.0" style="-fx-background-color: transparent;" text="Choose" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="continueButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="550.0" layoutY="81.0" style="-fx-background-color: #541690;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resume.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
+   <padding>
+      <Insets left="5.0" top="5.0" />
+   </padding>
+</AnchorPane>
