@@ -1,12 +1,17 @@
 package com.teamfour.iae;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -32,11 +37,42 @@ public class HomepageController implements Initializable {
     @FXML
     MFXButton runButton;
 
+    @FXML
+    MFXComboBox<Submission> submissionComboBox;
+
+    @FXML
+    MFXButton showReportButton;
+
+    @FXML
+    TextArea submissionOutputLog;
+
+    @FXML
+    TextArea expectedOutputLog;
+
+    @FXML
+    ImageView resultImage;
+
+    @FXML
+    Label resultText;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        expectedOutputLog.setEditable(false);
+        submissionOutputLog.setEditable(false);
+
         runButton.setOnAction(event -> OnRun());
+
+        showReportButton.setOnAction(event -> OnShowReport());
+
+        submissionComboBox.setOnMouseEntered(event ->{
+            if (ProjectManager.getInstance().getCurrentProject().getSubmissions() != null){
+
+                submissionComboBox.getItems().setAll(ProjectManager.getInstance().getCurrentProject().getSubmissions());
+
+            }
+        });
 
     }
 
@@ -51,6 +87,7 @@ public class HomepageController implements Initializable {
         try {
             ProcessSubmissions(submissionList);
             RunExecutables(submissionList);
+            CreateReports(submissionList);
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -85,12 +122,6 @@ public class HomepageController implements Initializable {
                 if (s.getName().trim().equals(currentConfig.getMainFileName())){
 
                     System.out.println("Compiling " + s.getName().trim());
-                    /*try {
-                        ProjectManager.getInstance().getProcessManager().CompileFile(currentConfig,submission.getDirectory());
-                        System.out.println("Compiled " + s.getName().trim());
-                    } catch (IOException | InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }*/
 
                 }
 
@@ -110,6 +141,9 @@ public class HomepageController implements Initializable {
             ProjectManager.getInstance().getProcessManager().CompileFile(currentConfig,s.getDirectory());
 
         }
+
+
+        ProjectManager.getInstance().getCurrentProject().setSubmissions(submissions);
 
     }
 
@@ -171,9 +205,64 @@ public class HomepageController implements Initializable {
 
         }
 
+        ProjectManager.getInstance().getCurrentProject().setSubmissions(submissions);
+
     }
 
+    private void CreateReports(ArrayList<Submission> submissions) throws IOException {
 
+        String expectedOutputFile = ProjectManager.getInstance().getCurrentProject().getExpectedOutputFilePath();
+
+        for (Submission s:submissions){
+
+            Report report = new Report();
+
+            String studentOutputPath = s.getDirectory()+"/"+Helpers.runtimeOutputLog;
+            String studentErrorPath = s.getDirectory()+"/"+Helpers.runtimeErrorLog;
+            String studentCompileTimeOutput = s.getDirectory()+"/"+Helpers.compileTimeOutputLog;
+            String studentCompileTimeError = s.getDirectory()+"/"+Helpers.compileTimeErrorLog;
+
+            if (Helpers.AreEqual(studentOutputPath,expectedOutputFile)){
+
+                report.setResult(Result.PASSED);
+
+            }else {
+
+                report.setResult(Result.FAILED);
+
+            }
+
+
+            report.setRuntimeOutputLog(Helpers.ReadFileIntoString(studentOutputPath));
+            report.setRuntimeErrorLog(Helpers.ReadFileIntoString(studentErrorPath));
+            report.setCompileTimeOutputLog(Helpers.ReadFileIntoString(studentCompileTimeOutput));
+            report.setCompileTimeErrorLog(Helpers.ReadFileIntoString(studentCompileTimeError));
+
+            report.setExpectedOutput(Helpers.ReadFileIntoString(expectedOutputFile));
+
+            s.setReport(report);
+
+        }
+
+        ProjectManager.getInstance().getCurrentProject().setSubmissions(submissions);
+
+
+    }
+
+    private void OnShowReport(){
+
+        if (submissionComboBox.getValue() == null) return;
+
+        Submission selected = submissionComboBox.getValue();
+
+        submissionOutputLog.setText(selected.getReport().getRuntimeOutputLog());
+        expectedOutputLog.setText(selected.getReport().getExpectedOutput());
+        resultText.setText(selected.getReport().getResult().toString());
+
+        Image i = new Image(Objects.requireNonNull(App.class.getResource(selected.getReport().getResult().toString().trim()+".png")).toExternalForm());
+        resultImage.setImage(i);
+
+    }
 
     @FXML
     public void OnNewProject() throws IOException {

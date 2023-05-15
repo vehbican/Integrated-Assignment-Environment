@@ -6,7 +6,9 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Helpers {
 
@@ -63,9 +65,50 @@ public class Helpers {
 
     }
 
+    public static boolean AreEqual(String file1, String file2) throws IOException {
+
+        BufferedReader reader1 = new BufferedReader(new FileReader(file1));
+        BufferedReader reader2 = new BufferedReader(new FileReader(file2));
+        String line1 = reader1.readLine();
+        String line2 = reader2.readLine();
+
+        boolean areEqual = true;
+        while (line1 != null || line2 != null){
+
+            if(line1 == null || line2 == null){
+                areEqual = false;
+                break;
+            } else if(! line1.equalsIgnoreCase(line2)) {
+                areEqual = false;
+                break;
+            }
+
+            line1 = reader1.readLine();
+            line2 = reader2.readLine();
+
+        }
+
+        reader1.close();
+        reader2.close();
+
+        return areEqual;
+    }
+
+
+    public static String ReadFileIntoString(String path) throws IOException {
+
+       return Files.readString(Path.of(path));
+
+    }
+
+
     public static String configsDir = "configs";
     public static String submissionsDir = "submissions";
 
+    public static String runtimeOutputLog = "runtimeOutput.txt";
+    public static String runtimeErrorLog = "runtimeError.txt";
+    public static String compileTimeOutputLog = "compileTimeOutput.txt";
+    public static String compileTimeErrorLog = "compileTimeError.txt";
 
 
 }

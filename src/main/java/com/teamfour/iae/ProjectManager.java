@@ -15,6 +15,7 @@ public class ProjectManager {
 
     private ProjectManager() {
 
+        currentProject = new Project();
         processManager = new ProcessManager();
 
         File configsDir = new File(Helpers.configsDir);

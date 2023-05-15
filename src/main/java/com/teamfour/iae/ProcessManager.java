@@ -21,10 +21,10 @@ public class ProcessManager {
         processBuilder.command(configuration.getCompilerParameters());
 
         //Create report
-        errorLog = new File(submissionDirectory+"\\compileTimeError.log");
+        errorLog = new File(submissionDirectory+"\\"+Helpers.compileTimeErrorLog);
         processBuilder.redirectError(errorLog);
 
-        outputLog = new File(submissionDirectory+"\\compileTimeOutput.log");
+        outputLog = new File(submissionDirectory+"\\"+Helpers.compileTimeOutputLog);
         processBuilder.redirectOutput(outputLog);
 
         // Start the process
@@ -64,10 +64,10 @@ public class ProcessManager {
         processBuilder.command(commands);
 
         // Create report
-        outputLog = new File(submissionDirectory + "\\runtimeOutput.log");
+        outputLog = new File(submissionDirectory + "\\"+Helpers.runtimeOutputLog);
         processBuilder.redirectOutput(outputLog);
 
-        errorLog = new File(submissionDirectory + "\\runtimeError.log");
+        errorLog = new File(submissionDirectory + "\\"+Helpers.runtimeErrorLog);
         processBuilder.redirectError(errorLog);
 
         // Start the process

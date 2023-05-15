@@ -40,4 +40,9 @@ public class Submission implements Serializable {
     public void setReport(Report report) {
         this.report = report;
     }
+
+    @Override
+    public String toString() {
+        return student.getStudentID();
+    }
 }

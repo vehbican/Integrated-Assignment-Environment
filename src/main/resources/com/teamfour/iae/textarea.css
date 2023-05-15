@@ -1,0 +1,13 @@
+.text-area {
+    text-area-background: #323262;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
+.text-area{
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+    -fx-font-family: Verdana;
+}
