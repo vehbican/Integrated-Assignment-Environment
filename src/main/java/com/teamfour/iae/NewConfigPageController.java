@@ -75,6 +75,11 @@ public class NewConfigPageController implements Initializable {
             detectedCompilers.add(gccPath);
         }
 
+        String gppPath = findPathOfCompiler("g++");
+        if (!gppPath.equals("")) {
+            detectedCompilers.add(gppPath);
+        }
+
         String pythonPath = findPathOfCompiler("python");
         if (!pythonPath.equals("")) {
             detectedCompilers.add(pythonPath);

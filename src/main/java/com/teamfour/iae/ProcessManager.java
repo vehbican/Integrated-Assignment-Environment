@@ -15,7 +15,7 @@ public class ProcessManager {
 
     public void CompileFile(Configuration configuration, String submissionDirectory) throws IOException, InterruptedException {
 
-        // Create a new process builder for calling GCC compiler
+        // Create a new process builder for calling compiler
         processBuilder = new ProcessBuilder();
         processBuilder.directory(new File(submissionDirectory));
         processBuilder.command(configuration.getCompilerParameters());
@@ -50,12 +50,11 @@ public class ProcessManager {
         processBuilder.directory(new File(String.valueOf(Paths.get(submissionDirectory))));
 
         List<String> commands = new ArrayList<>();
-        //commands.add(submissionDirectory+"\\");
 
         commands.addAll(configuration.getRuntimeParameters());
 
-        // gcc and dotnet compilers find the path only in this way.
-        if(configuration.getCompilerParameters().contains("gcc") || configuration.getCompilerParameters().get(0).contains("csc.exe")){
+        // gcc, g++ and dotnet compilers find the path only in this way.
+        if(configuration.getCompilerParameters().contains("gcc") || configuration.getCompilerParameters().get(0).contains("csc.exe") ||configuration.getCompilerParameters().contains("g++") ){
 
             String tmp = commands.get(0);
             commands.set(0,submissionDirectory+"/"+tmp);

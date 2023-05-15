@@ -57,6 +57,12 @@ public class Helpers {
 
     }
 
+    public static void CloseStage(Node node){
+
+        ((Stage)node.getScene().getWindow()).close();
+
+    }
+
     public static String configsDir = "configs";
     public static String submissionsDir = "submissions";
 

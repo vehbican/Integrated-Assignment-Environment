@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefWidth="1080.0" style="-fx-background-color: #323262;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.ManualInputPageController">
+   <children>
+      <MFXTextField fx:id="inputText" floatingText="Manual Input" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="10.0" />
+      <MFXButton fx:id="continueButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Next" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resume.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
+</AnchorPane>

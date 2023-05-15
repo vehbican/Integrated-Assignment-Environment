@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #282a36;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.HomepageController">
-    <MenuBar fx:id="MenuBar" layoutX="14.0" layoutY="14.0" stylesheets="@menubar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <VBox alignment="CENTER" maxHeight="35.0" prefHeight="35.0" style="-fx-background-color: #323262;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <MFXButton fx:id="runButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: #179963;" textAlignment="CENTER" textFill="#179963">
+            <graphic>
+               <ImageView cache="true" cacheHint="QUALITY" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@play.png" />
+                  </image>
+                  <effect>
+                     <Lighting diffuseConstant="1.35" specularConstant="0.75">
+                        <bumpInput>
+                           <Shadow>
+                              <input>
+                                 <GaussianBlur radius="20.0" />
+                              </input>
+                           </Shadow>
+                        </bumpInput>
+                        <light>
+                           <Light.Distant />
+                        </light>
+                     </Lighting>
+                  </effect>
+               </ImageView>
+            </graphic>
+            <VBox.margin>
+               <Insets bottom="5.0" top="5.0" />
+            </VBox.margin>
+         </MFXButton>
+      </children>
+   </VBox>
+    <MenuBar fx:id="MenuBar" layoutX="14.0" layoutY="14.0" maxHeight="35.0" prefHeight="35.0" stylesheets="@menubar.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
         <padding>
             <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
         </padding>

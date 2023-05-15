@@ -53,7 +53,7 @@ public class Main {
 
         //Compile Code
         ProcessManager processManager = new ProcessManager();
-        String submissionDirectory = "src/main/resources/com/teamfour/iae/extracteds/20200602036";
+        String submissionDirectory = "submissions/20200602036";
         try {
             processManager.CompileFile(project.getConfiguration(),submissionDirectory);
         } catch (IOException | InterruptedException e) {

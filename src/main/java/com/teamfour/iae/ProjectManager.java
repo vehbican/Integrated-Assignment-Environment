@@ -11,7 +11,11 @@ public class ProjectManager {
 
     private Project currentProject;
 
+    private final ProcessManager processManager;
+
     private ProjectManager() {
+
+        processManager = new ProcessManager();
 
         File configsDir = new File(Helpers.configsDir);
         if(!configsDir.exists()){configsDir.mkdirs();}
@@ -62,5 +66,9 @@ public class ProjectManager {
 
     public void setCurrentProject(Project currentProject) {
         this.currentProject = currentProject;
+    }
+
+    public ProcessManager getProcessManager() {
+        return processManager;
     }
 }
