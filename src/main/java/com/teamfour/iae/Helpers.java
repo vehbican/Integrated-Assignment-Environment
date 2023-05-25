@@ -39,6 +39,27 @@ public class Helpers {
 
     }
 
+    public static String[] parentFolderChooser(Node node, String title){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+
+        File initialDirectory = new File(System.getProperty("user.home"));
+        fileChooser.setInitialDirectory(initialDirectory);
+
+        Stage stage = (Stage) node.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null){
+            // get the directory of the selected file
+            File parentDirectory = selectedFile.getParentFile();
+            // return both the directory name and file name
+            return new String[] {parentDirectory.getName(), selectedFile.getName()};
+        }
+
+        return new String[] {"You did not choose a valid path", ""};
+    }
+
+
     public static String directoryChooser(Node node,String title){
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle(title);

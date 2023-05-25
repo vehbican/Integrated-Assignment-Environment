@@ -170,14 +170,14 @@ public class HomepageController implements Initializable {
 
                 // Input via a script that returns a string
 
-                /*FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("script-input-page.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("script-input-page.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setTitle("Script Input");
                 stage.setScene(scene);
                 stage.centerOnScreen();
                 stage.setResizable(false);
-                stage.showAndWait();*/
+                stage.showAndWait();
 
             }
 
