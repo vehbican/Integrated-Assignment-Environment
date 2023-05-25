@@ -35,7 +35,7 @@ public class ScriptInputPageController implements Initializable {
 
     private void OnChoose(){
 
-        scriptFolderAndFile = Helpers.parentFolderChooser(chooseButton, "Choose Script Folder");
+        scriptFolderAndFile = Helpers.parentFolderChooser(chooseButton, "Choose Script File");
         inputScriptPath.setText(scriptFolderAndFile[0]+"\\"+scriptFolderAndFile[1]);
 
     }
