@@ -376,15 +376,19 @@ public class HomepageController implements Initializable {
 
     }
 
-    @FXML
-    public void OnAbout(){
 
-
-
-    }
 
     @FXML
     public void OnDocumentation(){
+        File file = new File("Help.pdf");
+        if (file.exists()){
+            try{
+                new ProcessBuilder("cmd","/c",file.getAbsolutePath()).start();
+            }
+            catch (IOException e ){
+                e.printStackTrace();
+            }
+        }
 
 
 

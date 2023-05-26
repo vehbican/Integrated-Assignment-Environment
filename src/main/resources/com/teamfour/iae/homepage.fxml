@@ -72,7 +72,7 @@
             <MenuItem mnemonicParsing="false" onAction="#OnExportConfiguration" text="Export" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" onAction="#OnAbout" text="About" />
+
             <MenuItem mnemonicParsing="false" onAction="#OnDocumentation" text="Documentation" />
         </Menu>
     </MenuBar>
