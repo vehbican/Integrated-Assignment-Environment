@@ -123,9 +123,9 @@ public class Helpers {
     }
 
 
+    public static String projectsDir = "projects";
     public static String configsDir = "configs";
     public static String submissionsDir = "submissions";
-
     public static String runtimeOutputLog = "runtimeOutput.txt";
     public static String runtimeErrorLog = "runtimeError.txt";
     public static String compileTimeOutputLog = "compileTimeOutput.txt";

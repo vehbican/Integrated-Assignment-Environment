@@ -301,14 +301,48 @@ public class HomepageController implements Initializable {
     @FXML
     public void OnOpenProject(){
 
+        Project deserialized;
+        try {
+            deserialized = (Project) DataManager.DeserializeObject(Helpers.fileChooser(MenuBar,"Select Project"));
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
+        if (deserialized != null && deserialized.getClass().equals(Project.class)){
+
+            ProjectManager.getInstance().setCurrentProject(deserialized);
+            ProjectManager.getInstance().setCurrentConfiguration(deserialized.getConfiguration());
+            ProjectManager.getInstance().getImportedConfigurations().add(deserialized.getConfiguration());
+            projectInfo.setText(deserialized.showProjectInfo());
+            configInfo.setText(deserialized.getConfiguration().ConfigInfo());
+            Helpers.showAlert(Alert.AlertType.INFORMATION,"Configuration Imported",deserialized.showProjectInfo());
+
+
+        }else {
+
+            Helpers.showAlert(Alert.AlertType.ERROR,"Import Error","Import failed.");
+
+        }
 
 
     }
     @FXML
     public void OnSaveProject(){
 
+        Project p = ProjectManager.getInstance().getCurrentProject();
 
+        if (p == null) {
+            Helpers.showAlert(Alert.AlertType.WARNING, "Project Error", "Not found an active project.");
+            return;
+        }
+
+        //save
+        String path = Helpers.projectsDir+"/"+p.getName().trim().replaceAll(" ","-")+".txt";
+        try {
+            DataManager.SerializeObject(p,path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
     @FXML
