@@ -3,11 +3,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class ScriptInputPageController implements Initializable {
@@ -21,7 +18,9 @@ public class ScriptInputPageController implements Initializable {
     @FXML
     MFXButton continueButton;
 
-    String[] scriptFolderAndFile;
+    String exePath;
+
+    File exeFile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,45 +34,33 @@ public class ScriptInputPageController implements Initializable {
 
     private void OnChoose(){
 
-        scriptFolderAndFile = Helpers.parentFolderChooser(chooseButton, "Choose Script File");
-        inputScriptPath.setText(scriptFolderAndFile[0]+"\\"+scriptFolderAndFile[1]);
+        exePath = Helpers.exeFileChooser(chooseButton, "Choose Your EXE File");
+        exeFile = new File(exePath);
+        inputScriptPath.setText(exePath);
 
     }
 
-    //todo scriptFolderAndFile[0] = seçilen dosyanın parent klasörünün adı
-    //     scriptFolderAndFile[1] = seçilen dosyanın adı
-    // dosya adı configuration'daki ile aynı olmazsa ve configuration ile aynı dilde olmazsa çalışmıyor
-
     private void OnContinue() {
-        Configuration currentConfig = ProjectManager.getInstance().getCurrentProject().getConfiguration();
-        Project currentProject = ProjectManager.getInstance().getCurrentProject();
-
-        //Compile Code
-        ProcessManager processManager = new ProcessManager();
-        try {
-            processManager.CompileFile(currentProject.getConfiguration(), scriptFolderAndFile[0]);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
         //Run Exe
+        ProcessBuilder pb = new ProcessBuilder(exePath);
+        pb.directory(new File(exeFile.getParent()));
         try {
-            processManager.RunExecutable(currentConfig, scriptFolderAndFile[0]);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+            Process process = pb.start();
 
-        String testInputString;
-        try {
-            testInputString = new String(Files.readAllBytes(Paths.get(scriptFolderAndFile[0] + "\\" + Helpers.runtimeOutputLog)));
-        } catch (IOException e) {
+            // Read the output of the process
+            InputStream is = process.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            ProjectManager.getInstance().getCurrentProject().setTestInput(br.readLine());
+
+            // Wait for the process to finish
+            br.close();
+            int exitCode = process.waitFor();
+            System.out.println("Process exited with code " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        ProjectManager.getInstance().getCurrentProject().setTestInput(testInputString);
-
-
-        //Helpers.showAlert(Alert.AlertType.INFORMATION,"Information","Not implemented,yet. Please try manual input method.");
         Helpers.CloseStage(continueButton);
 
     }

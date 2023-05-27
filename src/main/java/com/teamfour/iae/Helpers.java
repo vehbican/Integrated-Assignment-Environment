@@ -39,8 +39,12 @@ public class Helpers {
 
     }
 
-    public static String[] parentFolderChooser(Node node, String title){
+    public static String exeFileChooser(Node node, String title){
         FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("EXE Files (*.exe)", "*.exe");
+        fileChooser.getExtensionFilters().add(extFilter);
+
         fileChooser.setTitle(title);
 
         File initialDirectory = new File(System.getProperty("user.home"));
@@ -50,13 +54,12 @@ public class Helpers {
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (selectedFile != null){
-            // get the directory of the selected file
-            File parentDirectory = selectedFile.getParentFile();
-            // return both the directory name and file name
-            return new String[] {parentDirectory.getName(), selectedFile.getName()};
+
+            return selectedFile.getAbsolutePath();
+
         }
 
-        return new String[] {"You did not choose a valid path", ""};
+        return "You did not choose a valid path";
     }
 
 

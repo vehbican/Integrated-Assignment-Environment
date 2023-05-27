@@ -8,11 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="720.0" style="-fx-background-color: #323262;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.iae.ScriptInputPageController">
    <children>
-      <MFXTextField fx:id="inputScriptPath" floatingText="Choose a script" layoutX="25.0" layoutY="25.0" prefHeight="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0" />
-      <Text fill="WHITE" layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; The script should print the input." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <MFXTextField fx:id="inputScriptPath" floatingText="Choose an .exe" layoutX="25.0" layoutY="25.0" prefHeight="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; The executable program should print the input out." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
       <Text fill="WHITE" layoutX="14.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; There should be one space between each input." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="120.0" />
       <Text fill="WHITE" layoutX="14.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt;&gt; Input should be in exactly one line." wrappingWidth="555.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="140.0" />
       <MFXButton fx:id="chooseButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="628.0" layoutY="11.0" style="-fx-background-color: transparent;" text="Choose" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">

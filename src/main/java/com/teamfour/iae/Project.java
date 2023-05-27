@@ -23,7 +23,7 @@ public class Project implements Serializable {
     public enum InputMethods{
 
         MANUAL,
-        VIA_SCRIPT
+        VIA_EXECUTABLE
 
     }
 

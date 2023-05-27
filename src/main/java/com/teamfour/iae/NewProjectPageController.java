@@ -58,7 +58,7 @@ public class NewProjectPageController implements Initializable {
         configurationComboBox.getItems().addAll(FXCollections.observableArrayList(ProjectManager.getInstance().getImportedConfigurations()));
 
 
-        ObservableList<Project.InputMethods> inputMethods = FXCollections.observableArrayList(Project.InputMethods.MANUAL,Project.InputMethods.VIA_SCRIPT);
+        ObservableList<Project.InputMethods> inputMethods = FXCollections.observableArrayList(Project.InputMethods.MANUAL,Project.InputMethods.VIA_EXECUTABLE);
         inputMethodComboBox.getItems().addAll(inputMethods);
 
         createConfigButton.setOnAction(event -> OnCreateConfig());

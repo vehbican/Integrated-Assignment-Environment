@@ -166,14 +166,14 @@ public class HomepageController implements Initializable {
                 stage.showAndWait();
 
             }
-            case VIA_SCRIPT -> {
+            case VIA_EXECUTABLE -> {
 
                 // Input via a script that returns a string
 
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("script-input-page.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
-                stage.setTitle("Script Input");
+                stage.setTitle("Program Input");
                 stage.setScene(scene);
                 stage.centerOnScreen();
                 stage.setResizable(false);
