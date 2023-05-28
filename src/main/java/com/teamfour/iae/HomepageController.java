@@ -296,6 +296,12 @@ public class HomepageController implements Initializable {
 
         newProjectPageController.homepageController = this;
 
+        expectedOutputLog.clear();
+        submissionOutputLog.clear();
+        resultText.setText("");
+        resultImage.setImage(null);
+        submissionComboBox.clear();
+
     }
 
     @FXML
@@ -312,11 +318,32 @@ public class HomepageController implements Initializable {
 
             ProjectManager.getInstance().setCurrentProject(deserialized);
             ProjectManager.getInstance().setCurrentConfiguration(deserialized.getConfiguration());
-            ProjectManager.getInstance().getImportedConfigurations().add(deserialized.getConfiguration());
+
+            boolean configFound = false;
+
+            for (Configuration c:ProjectManager.getInstance().getImportedConfigurations()){
+
+                if (c.getName().equals(deserialized.getConfiguration().getName())){
+
+                    configFound = true;
+                    break;
+
+                }
+
+            }
+
+            if (!configFound){
+                ProjectManager.getInstance().getImportedConfigurations().add(deserialized.getConfiguration());
+            }
             projectInfo.setText(deserialized.showProjectInfo());
             configInfo.setText(deserialized.getConfiguration().ConfigInfo());
             Helpers.showAlert(Alert.AlertType.INFORMATION,"Configuration Imported",deserialized.showProjectInfo());
 
+            expectedOutputLog.clear();
+            submissionOutputLog.clear();
+            resultText.setText("");
+            resultImage.setImage(null);
+            submissionComboBox.clear();
 
         }else {
 
@@ -346,9 +373,25 @@ public class HomepageController implements Initializable {
 
     }
     @FXML
-    public void OnProjectSettings(){
+    public void OnProjectSettings() throws IOException {
 
+        if (ProjectManager.getInstance().getCurrentProject().getName() == null){
+            Helpers.showAlert(Alert.AlertType.WARNING,"Not Found","There is not an active project.");
+            return;
+        }
 
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("project-settings-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 450);
+        Stage stage = new Stage();
+        stage.setTitle("Project Settings");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.show();
+
+        ProjectSettingsPageController settingsPageController = fxmlLoader.getController();
+
+        settingsPageController.homepageController = this;
 
     }
 
