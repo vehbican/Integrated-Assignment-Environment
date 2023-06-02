@@ -15,3 +15,20 @@ The Integrated Assignment Environment (IAE) is a lightweight application designe
 6. Results and Reporting: The IAE displays the results of each student file. Users can view the overall status of the assignments and access detailed reports.
 
 The IAE is designed to be robust and standalone, with no dependencies on external servers or libraries for Windows computers and includes a help manual for guidance.
+
+## Main Pages
+
+### Homepage
+
+![IAE Homepage](https://raw.githubusercontent.com/vehbican/Integrated-Assignment-Environment/main/readMeImages/homepage.png)
+
+### Create Configuration & Project
+
+<p float="left">
+  <img src="https://raw.githubusercontent.com/vehbican/Integrated-Assignment-Environment/main/readMeImages/create_config.png" width="400" />
+  <img src="https://raw.githubusercontent.com/vehbican/Integrated-Assignment-Environment/main/readMeImages/create_project.png" width="400" /> 
+</p>
+
+### Result
+
+![IAE Homepage](https://raw.githubusercontent.com/vehbican/Integrated-Assignment-Environment/main/readMeImages/resulted_homepage.png)
