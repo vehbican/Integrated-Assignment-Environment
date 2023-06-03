@@ -16,6 +16,11 @@ The Integrated Assignment Environment (IAE) is a lightweight application designe
 
 The IAE is designed to be robust and standalone, with no dependencies on external servers or libraries for Windows computers and includes a help manual for guidance.
 
+NEW PROJECT
+
+https://github.com/vehbican/Integrated-Assignment-Environment/assets/74835577/f544c1b0-836a-45a1-91c3-436e67e4ca9e
+
+
 ## Main Pages
 
 ### Homepage
