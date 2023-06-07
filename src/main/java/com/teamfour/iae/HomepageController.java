@@ -62,7 +62,7 @@ public class HomepageController implements Initializable {
         expectedOutputLog.setEditable(false);
         submissionOutputLog.setEditable(false);
 
-        runButton.setOnAction(event -> OnRun());
+        runButton.setOnAction(event -> onRunButtonPressed());
 
         showReportButton.setOnAction(event -> OnShowReport());
 
@@ -76,7 +76,7 @@ public class HomepageController implements Initializable {
 
     }
 
-    public void OnRun(){
+    public void onRunButtonPressed(){
         File submissionsDir = new File(Helpers.submissionsDir);
         File[] submissions = submissionsDir.listFiles();
 
